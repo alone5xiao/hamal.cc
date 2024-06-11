@@ -1,0 +1,34 @@
+id: Byzoro-Smart-sqli
+
+info:
+  name: CVE-2023-4120 Byzoro-Smart S40-S85F - SQL Injection && FileUpload
+  author: 4Zen
+  severity: critical
+  description: |
+    Byzoro-Smart S40 - S85F has SQL Injection
+  reference:
+    - https://www.byzoro.com/
+    - https://github.com/cugerQDHJ/cve/blob/main/rce.md
+
+  metadata:
+    max-request: 2
+    verified: true
+    fofa-query: app="byzoro-Smart"
+  tags: sqli,php,byzoro
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/importhtml.php"
+
+    matchers-condition: and
+    matchers:
+
+      - type: word
+        words:
+          - "Content-Type: text/html"
+        part: header
+
+      - type: status
+        status:
+          - 200
